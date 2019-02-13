@@ -1,6 +1,11 @@
-﻿using System.Net.Http;
+﻿using CustomerPreferenceCentre.Models;
 using NUnit.Framework;
 using Shouldly;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 
 namespace CustomerPreferenceCentreTests
 {
@@ -9,9 +14,11 @@ namespace CustomerPreferenceCentreTests
         [Test]
         public void ShouldReturnHelloWorld()
         {
-            var result = new HttpClient().GetAsync(Urls.CustomerPreferenceUrl).Result;
+            var content = new StringContent(new CustomerPreference().ToString(), Encoding.UTF8, "application/json");
 
-            result.Content.ReadAsStringAsync().Result.ShouldContain("Hello World");
+            var result = new HttpClient().PostAsync(Urls.CustomerPreferenceUrl, content).Result;
+
+            result.StatusCode.ShouldBe(HttpStatusCode.OK);
         }
     }
 }
