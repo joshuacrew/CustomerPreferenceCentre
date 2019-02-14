@@ -14,7 +14,7 @@ namespace CustomerPreferenceCentre.Models.CustomValidation
 
             var propertyInfo = typeInfo.GetProperties();
 
-            var numberOfNonNullProperties = propertyInfo.Count(property => property != null);
+            var numberOfNonNullProperties = propertyInfo.Count(property => property.GetValue(value) != null);
 
             return numberOfNonNullProperties == 1;
         }

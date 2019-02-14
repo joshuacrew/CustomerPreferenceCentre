@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using CustomerPreferenceCentre.Models;
+using CustomerPreferenceCentre.Models.Request;
 using CustomerPreferenceCentreTests.Infrastructure;
 using NUnit.Framework;
 using Shouldly;
@@ -11,7 +12,7 @@ namespace CustomerPreferenceCentreTests.CustomerPreference
         [Test]
         public void ShouldRequireCustomerName()
         {
-            var modelToValidate = new CustomerPreferenceCentre.Models.CustomerPreference
+            var modelToValidate = new CustomerPreferenceCentre.Models.Request.CustomerPreference
             {
                 MarketingPreference = new MarketingPreference
                 {
@@ -28,7 +29,7 @@ namespace CustomerPreferenceCentreTests.CustomerPreference
         [Test]
         public void ShouldRequireMarketingPreference()
         {
-            var modelToValidate = new CustomerPreferenceCentre.Models.CustomerPreference
+            var modelToValidate = new CustomerPreferenceCentre.Models.Request.CustomerPreference
             {
                 CustomerName = "a",
             };

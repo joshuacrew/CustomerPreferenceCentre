@@ -1,8 +1,7 @@
 ﻿using System;
 using CustomerPreferenceCentre.Models.CustomValidation;
-using Microsoft.AspNetCore.Hosting;
 
-namespace CustomerPreferenceCentre.Models
+namespace CustomerPreferenceCentre.Models.Request
 {
     [OnlyOneProperty(ErrorMessage = "Only one MarketingPreference can be selected.")]
     public class MarketingPreference
