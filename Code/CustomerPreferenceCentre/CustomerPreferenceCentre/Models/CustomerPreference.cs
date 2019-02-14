@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,16 +7,10 @@ namespace CustomerPreferenceCentre.Models
 {
     public class CustomerPreference
     {
+        [Required]
         public string CustomerName { get; set; }
 
+        [Required]
         public MarketingPreference MarketingPreference { get; set; }
-    }
-
-    public class MarketingPreference
-    {
-        public bool Never { get; set; }
-        public bool Everyday { get; set; }
-        public DateTime Date { get; set; }
-        public string[] Days { get; set; }
     }
 }

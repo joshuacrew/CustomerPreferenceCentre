@@ -9,7 +9,12 @@ namespace CustomerPreferenceCentre.Controllers
         [HttpPost]
         public ActionResult Post([FromBody]CustomerPreference customerPreferences)
         {
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                return Ok();
+            }
+
+            return BadRequest(ModelState);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CustomerPreferenceCentreTests
+namespace CustomerPreferenceCentreTests.Infrastructure
 {
     public class Urls
     {
