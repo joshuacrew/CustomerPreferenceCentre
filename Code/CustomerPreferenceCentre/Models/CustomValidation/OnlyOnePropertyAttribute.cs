@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-// This is a class-level attribute, doesn't make sense at the property level
 namespace CustomerPreferenceCentre.Models.CustomValidation
 {
     [AttributeUsage(AttributeTargets.Class)]

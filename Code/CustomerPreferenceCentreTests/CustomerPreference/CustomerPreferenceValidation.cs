@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using CustomerPreferenceCentre.Models;
+﻿using System;
 using CustomerPreferenceCentre.Models.Request;
 using CustomerPreferenceCentreTests.Infrastructure;
 using NUnit.Framework;
 using Shouldly;
+using System.Linq;
 
 namespace CustomerPreferenceCentreTests.CustomerPreference
 {
@@ -53,6 +53,36 @@ namespace CustomerPreferenceCentreTests.CustomerPreference
 
             validationResults.Count.ShouldBe(1);
             validationResults.First().ErrorMessage.ShouldBe("Only one MarketingPreference can be selected.");
+        }
+
+        [Test]
+        public void ShouldRequireAtLeastOneDayIsSelected()
+        {
+            var modelToValidate = new MarketingPreference
+            {
+                Days = new []{ "a"}
+            };
+
+            var validationResults = modelToValidate.ValidationResults();
+
+            validationResults.Count.ShouldBe(1);
+            validationResults.First().ErrorMessage.ShouldBe(
+                "Days must only contain 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'");
+        }
+
+        [TestCase(0)]
+        [TestCase(29)]
+        public void ShouldOnlyAllowNumbersBetween1And28Selected(int date)
+        {
+            var modelToValidate = new MarketingPreference
+            {
+                Date = date
+            };
+
+            var validationResults = modelToValidate.ValidationResults();
+
+            //validationResults.Count.ShouldBe(1);
+            validationResults.First().ErrorMessage.ShouldBe("The field Date must be between 1 and 28.");
         }
     }
 }

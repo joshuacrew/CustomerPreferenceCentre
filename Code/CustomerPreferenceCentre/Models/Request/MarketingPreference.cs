@@ -1,5 +1,6 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
 using CustomerPreferenceCentre.Models.CustomValidation;
+using JetBrains.Annotations;
 
 namespace CustomerPreferenceCentre.Models.Request
 {
@@ -8,8 +9,12 @@ namespace CustomerPreferenceCentre.Models.Request
     {
         public bool? Never { get; set; }
         public bool? Everyday { get; set; }
-        public DateTime? Date { get; set; }
-        //TODO add validation for only allowing "Monday, Tuesday, Wednesday, etc."
-        public string[] Days { get; set; }
+        [Range(1, 28)]
+        public int? Date { get; set; }
+
+        [CanBeNull]
+        [StringRange(ErrorMessage = "Days must only contain 'Monday', 'Tuesday', 'Wednesday'," +
+                                    " 'Thursday', 'Friday', 'Saturday', 'Sunday'")]
+        public string[] Days { get; set; } = null;
     }
 }
