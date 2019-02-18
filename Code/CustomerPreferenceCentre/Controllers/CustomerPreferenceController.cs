@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CustomerPreferenceCentre.Models;
@@ -49,17 +50,56 @@ namespace CustomerPreferenceCentre.Controllers
 
             if (marketingPreference.Date != null)
             {
-
+                return GenerateDates(marketingPreference.Date);
             }
+
+            if (marketingPreference.Days != null)
+            {
+                return GenerateDates(marketingPreference.Days);
+            }
+
+            
             return new List<DateTime>();
         }
 
-        private static List<DateTime> GenerateDates(int numberOfDays)
+        public static List<DateTime> GenerateDates(string[] marketingPreferenceDays)
         {
             var dates = new List<DateTime>();
-            var dateIn90Days = DateTime.Now.AddDays(numberOfDays);
+            var dateIn90Days = DateTime.Today.AddDays(90);
 
-            for (var dt = DateTime.Now; dt <= dateIn90Days; dt = dt.AddDays(1))
+            for (var dt = DateTime.Today; dt < dateIn90Days; dt = dt.AddDays(1))
+            {
+                if (marketingPreferenceDays.ToList().Contains(dt.DayOfWeek.ToString()))
+                {
+                    dates.Add(dt);
+                }
+            }
+
+            return dates;
+        }
+
+        public static List<DateTime> GenerateDates(int? marketingPreferenceDate)
+        {
+            var dates = new List<DateTime>();
+            var dateIn90Days = DateTime.Today.AddDays(90);
+
+            for (var dt = DateTime.Today; dt < dateIn90Days; dt = dt.AddDays(1))
+            {
+                if (dt.Day == marketingPreferenceDate)
+                {
+                    dates.Add(dt);
+                }
+            }
+
+            return dates;
+        }
+
+        public static List<DateTime> GenerateDates(int numberOfDays)
+        {
+            var dates = new List<DateTime>();
+            var dateIn90Days = DateTime.Today.AddDays(numberOfDays);
+
+            for (var dt = DateTime.Today; dt < dateIn90Days; dt = dt.AddDays(1))
             {
                 dates.Add(dt);
             }
