@@ -1,8 +1,8 @@
-﻿using CustomerPreferenceCentre.Controllers;
+﻿using System;
+using System.Linq;
+using CustomerPreferenceCentre.Core;
 using NUnit.Framework;
 using Shouldly;
-using System;
-using System.Linq;
 
 namespace CustomerPreferenceCentreTests.CustomerPreference
 {
@@ -11,7 +11,7 @@ namespace CustomerPreferenceCentreTests.CustomerPreference
         [Test]
         public void ShouldReturnAllDatesWhen90DatesSelected()
         {
-            var dates = CustomerPreferenceController.GenerateDates(90);
+            var dates = DateCalculator.GenerateDates();
 
             dates.Count.ShouldBe(90);
             dates.First().ShouldBe(DateTime.Today);
@@ -20,7 +20,7 @@ namespace CustomerPreferenceCentreTests.CustomerPreference
         [Test]
         public void ShouldReturnSelectedDatesWhenSpecificDayOfMonthSelected()
         {
-            var dates = CustomerPreferenceController.GenerateDates((int?)2);
+            var dates = DateCalculator.GenerateDates(2);
 
             dates.All(date => date.Day == 2).ShouldBeTrue();
         }
@@ -31,7 +31,7 @@ namespace CustomerPreferenceCentreTests.CustomerPreference
         {
             string[] days = { day };
 
-            var dates = CustomerPreferenceController.GenerateDates(days);
+            var dates = DateCalculator.GenerateDates(days);
 
             dates.All(date => date.DayOfWeek.ToString() == day).ShouldBeTrue();
         }
