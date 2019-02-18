@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerPreferenceCentre", "CustomerPreferenceCentre\CustomerPreferenceCentre.csproj", "{EA2B0AF4-9272-4B6C-9E8C-072CB62ACB2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerPreferenceCentreTests", "..\CustomerPreferenceCentreTests\CustomerPreferenceCentreTests\CustomerPreferenceCentreTests.csproj", "{5E704874-3295-4C39-BF54-92579FA38CEE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerPreferenceCentreTests", "..\CustomerPreferenceCentreTests\CustomerPreferenceCentreTests.csproj", "{5E704874-3295-4C39-BF54-92579FA38CEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

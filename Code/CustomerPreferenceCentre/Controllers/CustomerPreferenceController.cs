@@ -31,8 +31,40 @@ namespace CustomerPreferenceCentre.Controllers
                 new CustomerPreferenceResponse
                 {
                     CustomerName = customerPreference.CustomerName,
-                    MarketingDates = new List<DateTime>{ DateTime.Now }
+                    MarketingDates = GetMarketingDates(customerPreference.MarketingPreference)
                 }).ToList();
+        }
+
+        private static List<DateTime> GetMarketingDates(MarketingPreference marketingPreference)
+        {
+            if (marketingPreference.Never == true)
+            {
+                return new List<DateTime>();
+            }
+
+            if (marketingPreference.Everyday == true)
+            {
+                return GenerateDates(90);
+            }
+
+            if (marketingPreference.Date != null)
+            {
+
+            }
+            return new List<DateTime>();
+        }
+
+        private static List<DateTime> GenerateDates(int numberOfDays)
+        {
+            var dates = new List<DateTime>();
+            var dateIn90Days = DateTime.Now.AddDays(numberOfDays);
+
+            for (var dt = DateTime.Now; dt <= dateIn90Days; dt = dt.AddDays(1))
+            {
+                dates.Add(dt);
+            }
+
+            return dates;
         }
     }
 }

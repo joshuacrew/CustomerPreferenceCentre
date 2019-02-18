@@ -47,7 +47,6 @@ namespace CustomerPreferenceCentreTests.CustomerPreference
             {
                 Everyday = true,
                 Never = true
-
             };
 
             var validationResults = modelToValidate.ValidationResults();
