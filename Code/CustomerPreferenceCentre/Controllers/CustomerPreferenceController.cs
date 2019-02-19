@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CustomerPreferenceCentre.Core;
-using CustomerPreferenceCentre.Models;
 using CustomerPreferenceCentre.Models.Request;
-using CustomerPreferenceCentre.Models.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerPreferenceCentre.Controllers
@@ -24,7 +21,8 @@ namespace CustomerPreferenceCentre.Controllers
             if (ModelState.IsValid)
             {
                 var customerPreferenceResponse = MarketingHandler.BuildResponse(customerPreferences);
-                new ReportGenerator(_report).GenerateReport(customerPreferenceResponse);
+                var dictionary = customerPreferenceResponse.BuildDictionaryOfDatesAndNames();
+                _report.CreateReport(dictionary);
                 return Ok();
             }
         

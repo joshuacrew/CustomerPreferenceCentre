@@ -1,5 +1,4 @@
-﻿using System;
-using CustomerPreferenceCentre.Models.Request;
+﻿using CustomerPreferenceCentre.Models.Request;
 using CustomerPreferenceCentreTests.Infrastructure;
 using NUnit.Framework;
 using Shouldly;

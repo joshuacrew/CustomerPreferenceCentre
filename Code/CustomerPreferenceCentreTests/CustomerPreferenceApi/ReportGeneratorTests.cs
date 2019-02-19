@@ -21,7 +21,7 @@ namespace CustomerPreferenceCentreTests.CustomerPreferenceApi
                 }
             };
 
-            var dictionary = ReportGenerator.BuildDictionaryOfDatesAndNames(input);
+            var dictionary = input.BuildDictionaryOfDatesAndNames();
 
             dictionary[DateTime.Today].ShouldBe(new List<string> { "a" });
             dictionary[DateTime.Today.AddDays(1)].ShouldBe(new List<string> { "a" });
@@ -44,7 +44,7 @@ namespace CustomerPreferenceCentreTests.CustomerPreferenceApi
                 }
             };
 
-            var dictionary = ReportGenerator.BuildDictionaryOfDatesAndNames(input);
+            var dictionary = DictionaryBuilderExtension.BuildDictionaryOfDatesAndNames(input);
 
             dictionary[DateTime.Today].ShouldBe(new List<string> { "a", "b" });
         }

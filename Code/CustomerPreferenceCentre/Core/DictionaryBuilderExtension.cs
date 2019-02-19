@@ -5,22 +5,9 @@ using System.Linq;
 
 namespace CustomerPreferenceCentre.Core
 {
-    public class ReportGenerator
+    public static class DictionaryBuilderExtension
     {
-        private static IReport _report;
-
-        public ReportGenerator(IReport report)
-        {
-            _report = report;
-        }
-
-        public void GenerateReport(List<CustomerPreferenceResponse> customerPreferenceResponse)
-        {
-            var dictionary = BuildDictionaryOfDatesAndNames(customerPreferenceResponse);
-            _report.CreateReport(dictionary);
-        }
-
-        public static Dictionary<DateTime, List<string>> BuildDictionaryOfDatesAndNames(List<CustomerPreferenceResponse> customerPreferenceResponse)
+        public static Dictionary<DateTime, List<string>> BuildDictionaryOfDatesAndNames(this List<CustomerPreferenceResponse> customerPreferenceResponse)
         {
             var report = new Dictionary<DateTime, List<string>>();
             foreach (var customer in customerPreferenceResponse)
