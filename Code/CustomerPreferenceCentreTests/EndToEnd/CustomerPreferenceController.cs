@@ -43,6 +43,7 @@ namespace CustomerPreferenceCentreTests.EndToEnd
                 var jObject = JArray.Parse(result).First();
 
                 jObject["customerName"].ShouldBe("a");
+                jObject["marketingDates"].Count().ShouldBe(90);
             }
         }
 
