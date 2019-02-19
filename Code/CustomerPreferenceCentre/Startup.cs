@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CustomerPreferenceCentre.Core;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -19,6 +20,8 @@ namespace CustomerPreferenceCentre
             {
                 NullValueHandling = NullValueHandling.Ignore
             };
+
+            services.AddTransient<IReport, TextFileReport>();
 
         }
 

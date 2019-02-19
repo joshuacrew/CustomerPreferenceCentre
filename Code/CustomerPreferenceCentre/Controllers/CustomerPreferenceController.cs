@@ -19,14 +19,13 @@ namespace CustomerPreferenceCentre.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(CustomerPreferenceResponse), 200)]
         public IActionResult Post([FromBody]List<CustomerPreference> customerPreferences)
         {
             if (ModelState.IsValid)
             {
                 var customerPreferenceResponse = MarketingHandler.BuildResponse(customerPreferences);
                 new ReportGenerator(_report).GenerateReport(customerPreferenceResponse);
-                return Ok(customerPreferenceResponse);
+                return Ok();
             }
         
             return BadRequest(ModelState);

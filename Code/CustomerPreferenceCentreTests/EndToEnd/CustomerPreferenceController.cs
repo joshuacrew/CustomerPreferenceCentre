@@ -1,10 +1,12 @@
-﻿using CustomerPreferenceCentre.Models.Request;
+﻿using System;
+using CustomerPreferenceCentre.Models.Request;
 using CustomerPreferenceCentreTests.Infrastructure;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Shouldly;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -38,12 +40,13 @@ namespace CustomerPreferenceCentreTests.EndToEnd
 
                 response.StatusCode.ShouldBe(HttpStatusCode.OK);
 
-                var result = response.Content.ReadAsStringAsync().Result;
-
-                var jObject = JArray.Parse(result).First();
-
-                jObject["customerName"].ShouldBe("a");
-                jObject["marketingDates"].Count().ShouldBe(90);
+                using (var readText = new StreamReader("report.txt"))
+                {
+                    var reportLine1 = readText.ReadLine();
+                    reportLine1.ShouldBe($"{DateTime.Now.ToShortDateString()} a");
+                    var reportLine2 = readText.ReadLine();
+                    reportLine2.ShouldBe($"{DateTime.Now.AddDays(1).ToShortDateString()} a");
+                }
             }
         }
 
