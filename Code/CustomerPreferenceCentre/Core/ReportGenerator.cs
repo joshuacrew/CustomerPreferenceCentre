@@ -5,11 +5,19 @@ using System.Linq;
 
 namespace CustomerPreferenceCentre.Core
 {
-    public static class ReportGenerator
+    public class ReportGenerator
     {
-        public static void GenerateReport(this List<CustomerPreferenceResponse> customerPreferenceResponse)
+        private static IReport _report;
+
+        public ReportGenerator(IReport report)
         {
-            var report = BuildDictionaryOfDatesAndNames(customerPreferenceResponse);
+            _report = report;
+        }
+
+        public void GenerateReport(List<CustomerPreferenceResponse> customerPreferenceResponse)
+        {
+            var dictionary = BuildDictionaryOfDatesAndNames(customerPreferenceResponse);
+            _report.CreateReport(dictionary);
         }
 
         public static Dictionary<DateTime, List<string>> BuildDictionaryOfDatesAndNames(List<CustomerPreferenceResponse> customerPreferenceResponse)

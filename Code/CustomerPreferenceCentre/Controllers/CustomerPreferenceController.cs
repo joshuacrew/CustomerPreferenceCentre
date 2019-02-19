@@ -11,6 +11,13 @@ namespace CustomerPreferenceCentre.Controllers
     [Route("customer-preference")]
     public class CustomerPreferenceController : ControllerBase
     {
+        private readonly IReport _report;
+
+        public CustomerPreferenceController(IReport report)
+        {
+            _report = report;
+        }
+
         [HttpPost]
         [ProducesResponseType(typeof(CustomerPreferenceResponse), 200)]
         public IActionResult Post([FromBody]List<CustomerPreference> customerPreferences)
@@ -18,7 +25,7 @@ namespace CustomerPreferenceCentre.Controllers
             if (ModelState.IsValid)
             {
                 var customerPreferenceResponse = MarketingHandler.BuildResponse(customerPreferences);
-                customerPreferenceResponse.GenerateReport();
+                new ReportGenerator(_report).GenerateReport(customerPreferenceResponse);
                 return Ok(customerPreferenceResponse);
             }
         
