@@ -18,6 +18,7 @@ namespace CustomerPreferenceCentre.Controllers
             if (ModelState.IsValid)
             {
                 var customerPreferenceResponse = MarketingHandler.BuildResponse(customerPreferences);
+                customerPreferenceResponse.GenerateReport();
                 return Ok(customerPreferenceResponse);
             }
         
